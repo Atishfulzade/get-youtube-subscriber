@@ -70,10 +70,12 @@
   </head>
   <body>
     <div class="container">
+      <!-- Main Title -->
       <h1 style="text-align: center">
         Get YouTube Subscribers API Documentation
       </h1>
 
+      <!-- Endpoint: Get All Subscribers -->
       <div class="endpoint">
         <h2>GET /subscribers</h2>
         <p>Response with an array of subscribers (an object).</p>
@@ -97,10 +99,10 @@
 
     }
 ]
-            </pre
-        >
+        </pre>
       </div>
 
+      <!-- Endpoint: Get Subscriber Names and Channels -->
       <div class="endpoint">
         <h2>GET /subscribers/names</h2>
         <p>
@@ -125,10 +127,10 @@
 
     }
 ]
-            </pre
-        >
+        </pre>
       </div>
 
+      <!-- Endpoint: Get Subscriber by ID -->
       <div class="endpoint">
         <h2>GET /subscribers/:id</h2>
         <p>Response with a subscriber (an object) with the given ID.</p>
@@ -145,16 +147,16 @@
     "subscribedDate": "2024-06-01T03:12:17.834Z",
 
 }
-            </pre
-        >
+        </pre>
         <p><strong>Error Response:</strong></p>
         <pre>
 {
     "message": "Cannot find subscriber"
 }
-            </pre
-        >
+        </pre>
       </div>
+
+      <!-- Try API Routes -->
       <h2>Try this</h2>
       <div class="route">
         <strong>Get All Subscribers</strong>:
@@ -178,7 +180,10 @@
       <div id="output"></div>
     </div>
     <script>
+      // Base endpoint URL, dynamically generated based on current hostname
       let endpoint = `https://${document.location.hostname}`;
+
+      // Function to fetch and display data for a given route
       function navigateToUrl(route) {
         fetch(endpoint + route)
           .then((response) => response.json())
@@ -195,6 +200,7 @@
           });
       }
 
+      // Function to fetch and display data for a specific subscriber ID
       function navigateToSubscriber() {
         const id = document.getElementById("subscriberId").value;
         if (id) {
@@ -211,7 +217,8 @@
                 null,
                 2
               );
-              window.scrollTo(0, document.body.scrollHeight); // Scroll to bottom
+              // Scroll to bottom of the page after fetching data
+              window.scrollTo(0, document.body.scrollHeight);
             })
             .catch((error) => {
               document.getElementById("output").innerText =
@@ -221,30 +228,32 @@
           alert("Please enter a subscriber ID");
         }
       }
-      const id = document.getElementById("subscriberId").value;
-      if (id) {
-        fetch(
-          `https://youtube-subscriber-0aa7e2093c27.herokuapp.com/subscribers/${id}`
-        );
-        scrollTo(0, 1000)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Subscriber not found");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            document.getElementById("output").innerText = JSON.stringify(
-              data,
-              null,
-              2
-            );
-          })
-          .catch((error) => {
-            document.getElementById("output").innerText =
-              "Error: " + error.message;
-          });
-      }
+
+      // Retain last fetched subscriber ID on refresh and scroll to bottom if ID is present
+      window.onload = function () {
+        const id = document.getElementById("subscriberId").value;
+        if (id) {
+          fetch(`${endpoint}/subscribers/${id}`)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Subscriber not found");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              document.getElementById("output").innerText = JSON.stringify(
+                data,
+                null,
+                2
+              );
+              window.scrollTo(0, document.body.scrollHeight);
+            })
+            .catch((error) => {
+              document.getElementById("output").innerText =
+                "Error: " + error.message;
+            });
+        }
+      };
     </script>
   </body>
 </html>
