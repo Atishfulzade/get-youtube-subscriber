@@ -145,3 +145,9 @@ To enable debugging for Mongoose, add the following line before your `mongoose.c
 
 ```javascript
 mongoose.set('debug', true);
+
+## License
+
+This project is licensed under the MIT License.
+
+
