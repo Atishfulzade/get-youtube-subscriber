@@ -198,7 +198,7 @@
       function navigateToSubscriber() {
         const id = document.getElementById("subscriberId").value;
         if (id) {
-          fetch(endpoint + route)
+          fetch(`${endpoint}/${id}`)
             .then((response) => {
               if (!response.ok) {
                 throw new Error("Subscriber not found");
