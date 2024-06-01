@@ -4,23 +4,21 @@ This project is a simple Node.js application that connects to a MongoDB database
 
 ## Project Structure
 
-get-youtube-subscriber/
-├── public/
-│ └── index.html
-├── src/
-│ ├── app.js
-│ ├── createDatabase.js
-│ ├── data.js
-│ ├── index.js
-│ ├── models/
-│ │ └── subscribers.js
-│ └── routes/
-│ └── subscribers.js
-├── .env
-├── package.json
-└── README.md
-
-
+get-youtube-subscriber/                                                                                                                                                                                             
+├── public/                                                                                                                                                                                                         
+│ └── index.html                                                                                                                                                                                                    
+├── src/                                                                                                                                                                                                            
+│ ├── app.js                                                                                                                                                                                                        
+│ ├── createDatabase.js                                                                                                                                                                                             
+│ ├── data.js                                                                                                                                                                                                       
+│ ├── index.js                                                                                                                                                                                                      
+│ ├── models/                                                                                                                                                                                                       
+│ │ └── subscribers.js                                                                                                                                                                                              
+│ └── routes/                                                                                                                                                                                                       
+│ └── subscribers.js                                                                                                                                                                                                
+├── .env                                                                                                                                                                                                            
+├── package.json                                                                                                                                                                                                    
+└── README.md                                                                                                                                                                                                       
 
 ## Prerequisites
 
@@ -34,7 +32,7 @@ get-youtube-subscriber/
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/your-repo-name.git
+    git clone https://github.com/Atishfulzade/get-youtube-subscriber.git
     cd your-repo-name
     ```
 
