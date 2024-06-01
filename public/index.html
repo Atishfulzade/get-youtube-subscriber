@@ -35,6 +35,37 @@
       .endpoint p {
         margin: 5px 0;
       }
+      .route {
+        margin: 10px 0;
+      }
+      .route a {
+        color: blue;
+        cursor: pointer;
+      }
+      .route a:hover {
+        text-decoration: underline;
+      }
+      button {
+        padding: 5px 20px;
+        background-color: crimson;
+        color: white;
+        border-radius: 2px;
+        border: none;
+        outline: none;
+      }
+      input {
+        padding: 4px 10px;
+        color: #111;
+        border: none;
+        outline: 1px solid rgb(2, 2, 2);
+        border-radius: 2px;
+      }
+      #output {
+        padding: 10px;
+        height: fit-content;
+        width: 100%;
+        background-color: rgb(230, 228, 228);
+      }
     </style>
   </head>
   <body>
@@ -124,6 +155,95 @@
             </pre
         >
       </div>
+      <h2>Try this</h2>
+      <div class="route">
+        <strong>Get All Subscribers</strong>:
+        <a href="#" onclick="navigateTo('/subscribers')">/subscribers</a>
+      </div>
+      <div class="route">
+        <strong>Get Subscriber Names and Channels</strong>:
+        <a href="#" onclick="navigateTo('/subscribers/names')"
+          >/subscribers/names</a
+        >
+      </div>
+      <div class="route">
+        <strong>Get Subscriber by ID</strong>:
+        <input
+          type="text"
+          id="subscriberId"
+          placeholder="Enter Subscriber ID"
+        />
+        <button onclick="navigateToSubscriber()">Go</button>
+      </div>
+      <div id="output"></div>
     </div>
+    <script>
+      function navigateTo(route) {
+        fetch(`http://localhost:3000${route}`)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("output").innerText = JSON.stringify(
+              data,
+              null,
+              2
+            );
+          })
+          .catch((error) => {
+            document.getElementById("output").innerText =
+              "Error: " + error.message;
+          });
+      }
+
+      function navigateToSubscriber() {
+        const id = document.getElementById("subscriberId").value;
+        if (id) {
+          fetch(`http://localhost:3000/subscribers/${id}`)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Subscriber not found");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              document.getElementById("output").innerText = JSON.stringify(
+                data,
+                null,
+                2
+              );
+              window.scrollTo(0, document.body.scrollHeight); // Scroll to bottom
+            })
+            .catch((error) => {
+              document.getElementById("output").innerText =
+                "Error: " + error.message;
+            });
+        } else {
+          alert("Please enter a subscriber ID");
+        }
+      }
+      const id = document.getElementById("subscriberId").value;
+      if (id) {
+        fetch(`http://localhost:3000/subscribers/${id}`);
+        scrollTo(0, 1000)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Subscriber not found");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            document.getElementById("output").innerText = JSON.stringify(
+              data,
+              null,
+              2
+            );
+          })
+          .catch((error) => {
+            document.getElementById("output").innerText =
+              "Error: " + error.message;
+          });
+      } else {
+        alert("Please enter a subscriber ID");
+      }
+    </script>
   </body>
 </html>
