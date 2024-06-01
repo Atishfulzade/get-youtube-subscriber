@@ -179,7 +179,7 @@
     </div>
     <script>
       function navigateTo(route) {
-        fetch(`http://localhost:3000${route}`)
+        fetch(`https://youtube-subscriber-0aa7e2093c27.herokuapp.com/${route}`)
           .then((response) => response.json())
           .then((data) => {
             document.getElementById("output").innerText = JSON.stringify(
@@ -197,7 +197,9 @@
       function navigateToSubscriber() {
         const id = document.getElementById("subscriberId").value;
         if (id) {
-          fetch(`http://localhost:3000/subscribers/${id}`)
+          fetch(
+            `https://youtube-subscriber-0aa7e2093c27.herokuapp.com/subscribers/${id}`
+          )
             .then((response) => {
               if (!response.ok) {
                 throw new Error("Subscriber not found");
@@ -222,7 +224,9 @@
       }
       const id = document.getElementById("subscriberId").value;
       if (id) {
-        fetch(`http://localhost:3000/subscribers/${id}`);
+        fetch(
+          `https://youtube-subscriber-0aa7e2093c27.herokuapp.com/subscribers/${id}`
+        );
         scrollTo(0, 1000)
           .then((response) => {
             if (!response.ok) {
