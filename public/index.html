@@ -158,11 +158,11 @@
       <h2>Try this</h2>
       <div class="route">
         <strong>Get All Subscribers</strong>:
-        <a href="#" onclick="navigateTo('/subscribers')">/subscribers</a>
+        <a href="#" onclick="navigateToUrl('/subscribers')">/subscribers</a>
       </div>
       <div class="route">
         <strong>Get Subscriber Names and Channels</strong>:
-        <a href="#" onclick="navigateTo('/subscribers/names')"
+        <a href="#" onclick="navigateToUrl('/subscribers/names')"
           >/subscribers/names</a
         >
       </div>
@@ -178,8 +178,9 @@
       <div id="output"></div>
     </div>
     <script>
-      function navigateTo(route) {
-        fetch(`https://youtube-subscriber-0aa7e2093c27.herokuapp.com/${route}`)
+      let endpoint = `https://${document.location.hostname}`;
+      function navigateToUrl(route) {
+        fetch(endpoint + route)
           .then((response) => response.json())
           .then((data) => {
             document.getElementById("output").innerText = JSON.stringify(
@@ -197,9 +198,7 @@
       function navigateToSubscriber() {
         const id = document.getElementById("subscriberId").value;
         if (id) {
-          fetch(
-            `https://youtube-subscriber-0aa7e2093c27.herokuapp.com/subscribers/${id}`
-          )
+          fetch(endpoint + route)
             .then((response) => {
               if (!response.ok) {
                 throw new Error("Subscriber not found");
